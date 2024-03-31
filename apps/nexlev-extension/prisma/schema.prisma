@@ -11,7 +11,7 @@ model Channel {
   createdAt   DateTime @default(now())
   description String?
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  rpm         Decimal?
+  rpm         Float?
   title       String
   updatedAt   DateTime @updatedAt
   ytChannelId String   @unique

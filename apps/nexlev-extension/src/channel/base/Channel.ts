@@ -9,11 +9,10 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field, Float } from "@nestjs/graphql";
+import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsDate, IsString, IsOptional, IsNumber } from "class-validator";
 import { Type } from "class-transformer";
-import { Decimal } from "decimal.js";
 
 @ObjectType()
 class Channel {
@@ -50,10 +49,10 @@ class Channel {
   })
   @IsNumber()
   @IsOptional()
-  @Field(() => Float, {
+  @Field(() => Number, {
     nullable: true,
   })
-  rpm!: Decimal | null;
+  rpm!: number | null;
 
   @ApiProperty({
     required: true,
