@@ -10,7 +10,12 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, Channel } from "@prisma/client";
+
+import {
+  Prisma,
+  Channel, // @ts-ignore
+  ChannelStat,
+} from "@prisma/client";
 
 export class ChannelServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,5 +50,16 @@ export class ChannelServiceBase {
     args: Prisma.SelectSubset<T, Prisma.ChannelDeleteArgs>
   ): Promise<Channel> {
     return this.prisma.channel.delete(args);
+  }
+
+  async findChannelStats(
+    parentId: string,
+    args: Prisma.ChannelStatFindManyArgs
+  ): Promise<ChannelStat[]> {
+    return this.prisma.channel
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .channelStats(args);
   }
 }

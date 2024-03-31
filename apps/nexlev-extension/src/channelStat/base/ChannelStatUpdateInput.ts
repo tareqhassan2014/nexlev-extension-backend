@@ -11,39 +11,51 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ChannelStatUpdateManyWithoutChannelsInput } from "./ChannelStatUpdateManyWithoutChannelsInput";
 import {
-  ValidateNested,
+  IsInt,
   IsOptional,
-  IsString,
+  ValidateNested,
   IsNumber,
+  IsString,
 } from "class-validator";
+import { ChannelWhereUniqueInput } from "../../channel/base/ChannelWhereUniqueInput";
 import { Type } from "class-transformer";
 
 @InputType()
-class ChannelUpdateInput {
+class ChannelStatUpdateInput {
   @ApiProperty({
     required: false,
-    type: () => ChannelStatUpdateManyWithoutChannelsInput,
+    type: Number,
   })
-  @ValidateNested()
-  @Type(() => ChannelStatUpdateManyWithoutChannelsInput)
+  @IsInt()
   @IsOptional()
-  @Field(() => ChannelStatUpdateManyWithoutChannelsInput, {
+  @Field(() => Number, {
     nullable: true,
   })
-  channelStats?: ChannelStatUpdateManyWithoutChannelsInput;
+  avgVideoRevenue?: number | null;
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: Number,
   })
-  @IsString()
+  @IsInt()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => Number, {
     nullable: true,
   })
-  description?: string | null;
+  avgViewCount?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => ChannelWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ChannelWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ChannelWhereUniqueInput, {
+    nullable: true,
+  })
+  channel?: ChannelWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -58,6 +70,28 @@ class ChannelUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  totalRevenue?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  totalViewCount?: number | null;
+
+  @ApiProperty({
+    required: false,
     type: String,
   })
   @IsString()
@@ -65,7 +99,18 @@ class ChannelUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  title?: string;
+  username?: string;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  videoCount?: number | null;
 
   @ApiProperty({
     required: false,
@@ -79,4 +124,4 @@ class ChannelUpdateInput {
   ytChannelId?: string;
 }
 
-export { ChannelUpdateInput as ChannelUpdateInput };
+export { ChannelStatUpdateInput as ChannelStatUpdateInput };

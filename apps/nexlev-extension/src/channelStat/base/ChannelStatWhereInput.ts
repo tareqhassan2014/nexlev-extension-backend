@@ -11,37 +11,48 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ChannelStatListRelationFilter } from "../../channelStat/base/ChannelStatListRelationFilter";
-import { ValidateNested, IsOptional } from "class-validator";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { Type } from "class-transformer";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { IsOptional, ValidateNested } from "class-validator";
+import { ChannelWhereUniqueInput } from "../../channel/base/ChannelWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 
 @InputType()
-class ChannelWhereInput {
+class ChannelStatWhereInput {
   @ApiProperty({
     required: false,
-    type: () => ChannelStatListRelationFilter,
+    type: IntNullableFilter,
   })
-  @ValidateNested()
-  @Type(() => ChannelStatListRelationFilter)
+  @Type(() => IntNullableFilter)
   @IsOptional()
-  @Field(() => ChannelStatListRelationFilter, {
+  @Field(() => IntNullableFilter, {
     nullable: true,
   })
-  channelStats?: ChannelStatListRelationFilter;
+  avgVideoRevenue?: IntNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: IntNullableFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => IntNullableFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => IntNullableFilter, {
     nullable: true,
   })
-  description?: StringNullableFilter;
+  avgViewCount?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ChannelWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => ChannelWhereUniqueInput)
+  @IsOptional()
+  @Field(() => ChannelWhereUniqueInput, {
+    nullable: true,
+  })
+  channel?: ChannelWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -67,6 +78,28 @@ class ChannelWhereInput {
 
   @ApiProperty({
     required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  totalRevenue?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  totalViewCount?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -74,7 +107,18 @@ class ChannelWhereInput {
   @Field(() => StringFilter, {
     nullable: true,
   })
-  title?: StringFilter;
+  username?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  videoCount?: IntNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -88,4 +132,4 @@ class ChannelWhereInput {
   ytChannelId?: StringFilter;
 }
 
-export { ChannelWhereInput as ChannelWhereInput };
+export { ChannelStatWhereInput as ChannelStatWhereInput };

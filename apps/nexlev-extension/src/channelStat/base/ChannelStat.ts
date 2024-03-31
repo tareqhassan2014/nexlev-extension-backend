@@ -11,26 +11,49 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ChannelStat } from "../../channelStat/base/ChannelStat";
 import {
-  ValidateNested,
+  IsInt,
   IsOptional,
+  ValidateNested,
   IsDate,
   IsString,
   IsNumber,
 } from "class-validator";
+import { Channel } from "../../channel/base/Channel";
 import { Type } from "class-transformer";
 
 @ObjectType()
-class Channel {
+class ChannelStat {
   @ApiProperty({
     required: false,
-    type: () => [ChannelStat],
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  avgVideoRevenue!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  avgViewCount!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => Channel,
   })
   @ValidateNested()
-  @Type(() => ChannelStat)
+  @Type(() => Channel)
   @IsOptional()
-  channelStats?: Array<ChannelStat>;
+  channel?: Channel | null;
 
   @ApiProperty({
     required: true,
@@ -39,17 +62,6 @@ class Channel {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  description!: string | null;
 
   @ApiProperty({
     required: true,
@@ -71,12 +83,26 @@ class Channel {
   rpm!: number | null;
 
   @ApiProperty({
-    required: true,
-    type: String,
+    required: false,
+    type: Number,
   })
-  @IsString()
-  @Field(() => String)
-  title!: string;
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  totalRevenue!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  totalViewCount!: number | null;
 
   @ApiProperty({
     required: true,
@@ -92,7 +118,26 @@ class Channel {
   })
   @IsString()
   @Field(() => String)
+  username!: string;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  videoCount!: number | null;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
   ytChannelId!: string;
 }
 
-export { Channel as Channel };
+export { ChannelStat as ChannelStat };
