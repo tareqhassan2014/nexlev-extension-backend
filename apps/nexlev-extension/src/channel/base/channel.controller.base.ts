@@ -22,6 +22,9 @@ import { Channel } from "./Channel";
 import { ChannelFindManyArgs } from "./ChannelFindManyArgs";
 import { ChannelWhereUniqueInput } from "./ChannelWhereUniqueInput";
 import { ChannelUpdateInput } from "./ChannelUpdateInput";
+import { ChannelStatFindManyArgs } from "../../channelStat/base/ChannelStatFindManyArgs";
+import { ChannelStat } from "../../channelStat/base/ChannelStat";
+import { ChannelStatWhereUniqueInput } from "../../channelStat/base/ChannelStatWhereUniqueInput";
 
 export class ChannelControllerBase {
   constructor(protected readonly service: ChannelService) {}
@@ -147,5 +150,94 @@ export class ChannelControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.Get("/:id/channelStats")
+  @ApiNestedQuery(ChannelStatFindManyArgs)
+  async findChannelStats(
+    @common.Req() request: Request,
+    @common.Param() params: ChannelWhereUniqueInput
+  ): Promise<ChannelStat[]> {
+    const query = plainToClass(ChannelStatFindManyArgs, request.query);
+    const results = await this.service.findChannelStats(params.id, {
+      ...query,
+      select: {
+        avgVideoRevenue: true,
+        avgViewCount: true,
+
+        channel: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        id: true,
+        rpm: true,
+        totalRevenue: true,
+        totalViewCount: true,
+        updatedAt: true,
+        username: true,
+        videoCount: true,
+        ytChannelId: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/channelStats")
+  async connectChannelStats(
+    @common.Param() params: ChannelWhereUniqueInput,
+    @common.Body() body: ChannelStatWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      channelStats: {
+        connect: body,
+      },
+    };
+    await this.service.updateChannel({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/channelStats")
+  async updateChannelStats(
+    @common.Param() params: ChannelWhereUniqueInput,
+    @common.Body() body: ChannelStatWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      channelStats: {
+        set: body,
+      },
+    };
+    await this.service.updateChannel({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/channelStats")
+  async disconnectChannelStats(
+    @common.Param() params: ChannelWhereUniqueInput,
+    @common.Body() body: ChannelStatWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      channelStats: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateChannel({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

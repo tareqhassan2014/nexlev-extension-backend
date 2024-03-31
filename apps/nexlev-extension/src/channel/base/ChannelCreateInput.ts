@@ -11,10 +11,29 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsNumber } from "class-validator";
+import { ChannelStatCreateNestedManyWithoutChannelsInput } from "./ChannelStatCreateNestedManyWithoutChannelsInput";
+import {
+  ValidateNested,
+  IsOptional,
+  IsString,
+  IsNumber,
+} from "class-validator";
+import { Type } from "class-transformer";
 
 @InputType()
 class ChannelCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => ChannelStatCreateNestedManyWithoutChannelsInput,
+  })
+  @ValidateNested()
+  @Type(() => ChannelStatCreateNestedManyWithoutChannelsInput)
+  @IsOptional()
+  @Field(() => ChannelStatCreateNestedManyWithoutChannelsInput, {
+    nullable: true,
+  })
+  channelStats?: ChannelStatCreateNestedManyWithoutChannelsInput;
+
   @ApiProperty({
     required: false,
     type: String,
