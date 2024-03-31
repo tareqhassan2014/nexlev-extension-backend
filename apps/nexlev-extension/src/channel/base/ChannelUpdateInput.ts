@@ -9,10 +9,9 @@ https://docs.amplication.com/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field, Float } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, IsNumber } from "class-validator";
-import { Decimal } from "decimal.js";
 
 @InputType()
 class ChannelUpdateInput {
@@ -33,10 +32,10 @@ class ChannelUpdateInput {
   })
   @IsNumber()
   @IsOptional()
-  @Field(() => Float, {
+  @Field(() => Number, {
     nullable: true,
   })
-  rpm?: Decimal | null;
+  rpm?: number | null;
 
   @ApiProperty({
     required: false,
