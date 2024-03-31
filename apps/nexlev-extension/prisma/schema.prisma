@@ -1,0 +1,18 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Channel {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  rpm         Decimal?
+  title       String
+  updatedAt   DateTime @updatedAt
+  ytChannelId String   @unique
+}
