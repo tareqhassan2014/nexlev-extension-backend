@@ -11,28 +11,23 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ChannelStatUpdateManyWithoutChannelsInput } from "./ChannelStatUpdateManyWithoutChannelsInput";
-import {
-  ValidateNested,
-  IsOptional,
-  IsString,
-  IsNumber,
-} from "class-validator";
+import { ChannelStatWhereUniqueInput } from "../../channelStat/base/ChannelStatWhereUniqueInput";
+import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 
 @InputType()
 class ChannelUpdateInput {
   @ApiProperty({
     required: false,
-    type: () => ChannelStatUpdateManyWithoutChannelsInput,
+    type: () => ChannelStatWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => ChannelStatUpdateManyWithoutChannelsInput)
+  @Type(() => ChannelStatWhereUniqueInput)
   @IsOptional()
-  @Field(() => ChannelStatUpdateManyWithoutChannelsInput, {
+  @Field(() => ChannelStatWhereUniqueInput, {
     nullable: true,
   })
-  channelStats?: ChannelStatUpdateManyWithoutChannelsInput;
+  channelStats?: ChannelStatWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -47,17 +42,6 @@ class ChannelUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  rpm?: number | null;
-
-  @ApiProperty({
-    required: false,
     type: String,
   })
   @IsString()
@@ -66,17 +50,6 @@ class ChannelUpdateInput {
     nullable: true,
   })
   title?: string;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  ytChannelId?: string;
 }
 
 export { ChannelUpdateInput as ChannelUpdateInput };

@@ -21,39 +21,31 @@ const CREATE_INPUT = {
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",
-  rpm: 42.42,
   title: "exampleTitle",
   updatedAt: new Date(),
-  ytChannelId: "exampleYtChannelId",
 };
 const CREATE_RESULT = {
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",
-  rpm: 42.42,
   title: "exampleTitle",
   updatedAt: new Date(),
-  ytChannelId: "exampleYtChannelId",
 };
 const FIND_MANY_RESULT = [
   {
     createdAt: new Date(),
     description: "exampleDescription",
     id: "exampleId",
-    rpm: 42.42,
     title: "exampleTitle",
     updatedAt: new Date(),
-    ytChannelId: "exampleYtChannelId",
   },
 ];
 const FIND_ONE_RESULT = {
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",
-  rpm: 42.42,
   title: "exampleTitle",
   updatedAt: new Date(),
-  ytChannelId: "exampleYtChannelId",
 };
 
 const service = {

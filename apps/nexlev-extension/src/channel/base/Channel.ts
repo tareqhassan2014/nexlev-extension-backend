@@ -12,25 +12,19 @@ https://docs.amplication.com/how-to/custom-code
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { ChannelStat } from "../../channelStat/base/ChannelStat";
-import {
-  ValidateNested,
-  IsOptional,
-  IsDate,
-  IsString,
-  IsNumber,
-} from "class-validator";
+import { ValidateNested, IsOptional, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
 
 @ObjectType()
 class Channel {
   @ApiProperty({
     required: false,
-    type: () => [ChannelStat],
+    type: () => ChannelStat,
   })
   @ValidateNested()
   @Type(() => ChannelStat)
   @IsOptional()
-  channelStats?: Array<ChannelStat>;
+  channelStats?: ChannelStat | null;
 
   @ApiProperty({
     required: true,
@@ -60,17 +54,6 @@ class Channel {
   id!: string;
 
   @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  rpm!: number | null;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
@@ -85,14 +68,6 @@ class Channel {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  ytChannelId!: string;
 }
 
 export { Channel as Channel };

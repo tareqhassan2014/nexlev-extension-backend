@@ -28,6 +28,17 @@ class ChannelOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  channelStatsId?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   createdAt?: SortOrder;
 
   @ApiProperty({
@@ -61,17 +72,6 @@ class ChannelOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  rpm?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   title?: SortOrder;
 
   @ApiProperty({
@@ -84,17 +84,6 @@ class ChannelOrderByInput {
     nullable: true,
   })
   updatedAt?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  ytChannelId?: SortOrder;
 }
 
 export { ChannelOrderByInput as ChannelOrderByInput };
