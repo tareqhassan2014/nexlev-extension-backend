@@ -47,6 +47,14 @@ class ChannelCreateInput {
   @IsString()
   @Field(() => String)
   title!: string;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  username!: string;
 }
 
 export { ChannelCreateInput as ChannelCreateInput };

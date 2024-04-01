@@ -52,6 +52,7 @@ export class ChannelControllerBase {
         id: true,
         title: true,
         updatedAt: true,
+        username: true,
       },
     });
   }
@@ -75,6 +76,7 @@ export class ChannelControllerBase {
         id: true,
         title: true,
         updatedAt: true,
+        username: true,
       },
     });
   }
@@ -99,6 +101,7 @@ export class ChannelControllerBase {
         id: true,
         title: true,
         updatedAt: true,
+        username: true,
       },
     });
     if (result === null) {
@@ -140,6 +143,7 @@ export class ChannelControllerBase {
           id: true,
           title: true,
           updatedAt: true,
+          username: true,
         },
       });
     } catch (error) {
@@ -173,6 +177,7 @@ export class ChannelControllerBase {
           id: true,
           title: true,
           updatedAt: true,
+          username: true,
         },
       });
     } catch (error) {

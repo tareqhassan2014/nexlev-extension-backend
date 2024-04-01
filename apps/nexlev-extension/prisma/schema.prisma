@@ -15,6 +15,7 @@ model Channel {
   id             String       @id @default(auto()) @map("_id") @db.ObjectId
   title          String
   updatedAt      DateTime     @updatedAt
+  username       String       @unique
 }
 
 model ChannelStat {
