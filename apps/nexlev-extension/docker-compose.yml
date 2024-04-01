@@ -9,6 +9,8 @@ services:
       - ${PORT}:3000
     environment:
       BCRYPT_SALT: ${BCRYPT_SALT}
+      LOG_LEVEL: ${LOG_LEVEL}
+      SERVICE_NAME: ${SERVICE_NAME}
       DB_URL: mongodb://${DB_USER}:${DB_PASSWORD}@db:27017/${DB_NAME}?authSource=admin
     depends_on:
       - migrate

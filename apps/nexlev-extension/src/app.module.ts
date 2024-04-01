@@ -8,9 +8,12 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { ServeStaticOptionsService } from "./serveStaticOptions.service";
 import { ConfigModule } from "@nestjs/config";
 
+import { LoggerModule } from "./logger/logger.module";
+
 @Module({
   controllers: [],
   imports: [
+    LoggerModule,
     ChannelModule,
     ChannelStatModule,
     HealthModule,
