@@ -8,21 +8,19 @@ generator client {
 }
 
 model Channel {
-  channelStats ChannelStat[]
-  createdAt    DateTime      @default(now())
-  description  String?
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  rpm          Float?
-  title        String
-  updatedAt    DateTime      @updatedAt
-  ytChannelId  String        @unique
+  channelStats   ChannelStat? @relation(fields: [channelStatsId], references: [id])
+  channelStatsId String?      @unique @db.ObjectId
+  createdAt      DateTime     @default(now())
+  description    String?
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  updatedAt      DateTime     @updatedAt
 }
 
 model ChannelStat {
   avgVideoRevenue Int?
   avgViewCount    Int?
-  channel         Channel? @relation(fields: [channelId], references: [id])
-  channelId       String?  @db.ObjectId
+  channel         Channel?
   createdAt       DateTime @default(now())
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   rpm             Float?

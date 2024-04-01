@@ -11,26 +11,25 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ChannelStatListRelationFilter } from "../../channelStat/base/ChannelStatListRelationFilter";
+import { ChannelStatWhereUniqueInput } from "../../channelStat/base/ChannelStatWhereUniqueInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 
 @InputType()
 class ChannelWhereInput {
   @ApiProperty({
     required: false,
-    type: () => ChannelStatListRelationFilter,
+    type: () => ChannelStatWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => ChannelStatListRelationFilter)
+  @Type(() => ChannelStatWhereUniqueInput)
   @IsOptional()
-  @Field(() => ChannelStatListRelationFilter, {
+  @Field(() => ChannelStatWhereUniqueInput, {
     nullable: true,
   })
-  channelStats?: ChannelStatListRelationFilter;
+  channelStats?: ChannelStatWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -56,17 +55,6 @@ class ChannelWhereInput {
 
   @ApiProperty({
     required: false,
-    type: FloatNullableFilter,
-  })
-  @Type(() => FloatNullableFilter)
-  @IsOptional()
-  @Field(() => FloatNullableFilter, {
-    nullable: true,
-  })
-  rpm?: FloatNullableFilter;
-
-  @ApiProperty({
-    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -75,17 +63,6 @@ class ChannelWhereInput {
     nullable: true,
   })
   title?: StringFilter;
-
-  @ApiProperty({
-    required: false,
-    type: StringFilter,
-  })
-  @Type(() => StringFilter)
-  @IsOptional()
-  @Field(() => StringFilter, {
-    nullable: true,
-  })
-  ytChannelId?: StringFilter;
 }
 
 export { ChannelWhereInput as ChannelWhereInput };

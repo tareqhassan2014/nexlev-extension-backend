@@ -52,14 +52,11 @@ export class ChannelServiceBase {
     return this.prisma.channel.delete(args);
   }
 
-  async findChannelStats(
-    parentId: string,
-    args: Prisma.ChannelStatFindManyArgs
-  ): Promise<ChannelStat[]> {
+  async getChannelStats(parentId: string): Promise<ChannelStat | null> {
     return this.prisma.channel
-      .findUniqueOrThrow({
+      .findUnique({
         where: { id: parentId },
       })
-      .channelStats(args);
+      .channelStats();
   }
 }

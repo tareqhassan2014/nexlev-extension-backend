@@ -11,28 +11,23 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { ChannelStatCreateNestedManyWithoutChannelsInput } from "./ChannelStatCreateNestedManyWithoutChannelsInput";
-import {
-  ValidateNested,
-  IsOptional,
-  IsString,
-  IsNumber,
-} from "class-validator";
+import { ChannelStatWhereUniqueInput } from "../../channelStat/base/ChannelStatWhereUniqueInput";
+import { ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
 
 @InputType()
 class ChannelCreateInput {
   @ApiProperty({
     required: false,
-    type: () => ChannelStatCreateNestedManyWithoutChannelsInput,
+    type: () => ChannelStatWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => ChannelStatCreateNestedManyWithoutChannelsInput)
+  @Type(() => ChannelStatWhereUniqueInput)
   @IsOptional()
-  @Field(() => ChannelStatCreateNestedManyWithoutChannelsInput, {
+  @Field(() => ChannelStatWhereUniqueInput, {
     nullable: true,
   })
-  channelStats?: ChannelStatCreateNestedManyWithoutChannelsInput;
+  channelStats?: ChannelStatWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -46,31 +41,12 @@ class ChannelCreateInput {
   description?: string | null;
 
   @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  rpm?: number | null;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   title!: string;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  ytChannelId!: string;
 }
 
 export { ChannelCreateInput as ChannelCreateInput };
