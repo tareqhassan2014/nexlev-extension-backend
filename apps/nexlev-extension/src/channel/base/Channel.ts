@@ -68,6 +68,14 @@ class Channel {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  username!: string;
 }
 
 export { Channel as Channel };

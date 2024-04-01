@@ -50,6 +50,17 @@ class ChannelUpdateInput {
     nullable: true,
   })
   title?: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  username?: string;
 }
 
 export { ChannelUpdateInput as ChannelUpdateInput };
