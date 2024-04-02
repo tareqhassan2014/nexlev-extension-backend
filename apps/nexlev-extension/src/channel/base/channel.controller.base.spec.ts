@@ -18,35 +18,51 @@ import { ChannelService } from "../channel.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  channelCategory: "exampleChannelCategory",
+  channelCreationDate: new Date(),
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",
+  isMonetizationEnabled: "true",
+  playlistId: "examplePlaylistId",
   title: "exampleTitle",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
 const CREATE_RESULT = {
+  channelCategory: "exampleChannelCategory",
+  channelCreationDate: new Date(),
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",
+  isMonetizationEnabled: "true",
+  playlistId: "examplePlaylistId",
   title: "exampleTitle",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
 const FIND_MANY_RESULT = [
   {
+    channelCategory: "exampleChannelCategory",
+    channelCreationDate: new Date(),
     createdAt: new Date(),
     description: "exampleDescription",
     id: "exampleId",
+    isMonetizationEnabled: "true",
+    playlistId: "examplePlaylistId",
     title: "exampleTitle",
     updatedAt: new Date(),
     username: "exampleUsername",
   },
 ];
 const FIND_ONE_RESULT = {
+  channelCategory: "exampleChannelCategory",
+  channelCreationDate: new Date(),
   createdAt: new Date(),
   description: "exampleDescription",
   id: "exampleId",
+  isMonetizationEnabled: "true",
+  playlistId: "examplePlaylistId",
   title: "exampleTitle",
   updatedAt: new Date(),
   username: "exampleUsername",
@@ -134,6 +150,7 @@ describe("Channel", () => {
       .expect(HttpStatus.CREATED)
       .expect({
         ...CREATE_RESULT,
+        channelCreationDate: CREATE_RESULT.channelCreationDate.toISOString(),
         createdAt: CREATE_RESULT.createdAt.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
@@ -146,6 +163,8 @@ describe("Channel", () => {
       .expect([
         {
           ...FIND_MANY_RESULT[0],
+          channelCreationDate:
+            FIND_MANY_RESULT[0].channelCreationDate.toISOString(),
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
@@ -169,6 +188,7 @@ describe("Channel", () => {
       .expect(HttpStatus.OK)
       .expect({
         ...FIND_ONE_RESULT,
+        channelCreationDate: FIND_ONE_RESULT.channelCreationDate.toISOString(),
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
@@ -182,6 +202,7 @@ describe("Channel", () => {
       .expect(HttpStatus.CREATED)
       .expect({
         ...CREATE_RESULT,
+        channelCreationDate: CREATE_RESULT.channelCreationDate.toISOString(),
         createdAt: CREATE_RESULT.createdAt.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       })

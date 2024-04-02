@@ -41,6 +41,9 @@ export class ChannelControllerBase {
           : undefined,
       },
       select: {
+        channelCategory: true,
+        channelCreationDate: true,
+
         channelStats: {
           select: {
             id: true,
@@ -50,6 +53,8 @@ export class ChannelControllerBase {
         createdAt: true,
         description: true,
         id: true,
+        isMonetizationEnabled: true,
+        playlistId: true,
         title: true,
         updatedAt: true,
         username: true,
@@ -65,6 +70,9 @@ export class ChannelControllerBase {
     return this.service.channels({
       ...args,
       select: {
+        channelCategory: true,
+        channelCreationDate: true,
+
         channelStats: {
           select: {
             id: true,
@@ -74,6 +82,8 @@ export class ChannelControllerBase {
         createdAt: true,
         description: true,
         id: true,
+        isMonetizationEnabled: true,
+        playlistId: true,
         title: true,
         updatedAt: true,
         username: true,
@@ -90,6 +100,9 @@ export class ChannelControllerBase {
     const result = await this.service.channel({
       where: params,
       select: {
+        channelCategory: true,
+        channelCreationDate: true,
+
         channelStats: {
           select: {
             id: true,
@@ -99,6 +112,8 @@ export class ChannelControllerBase {
         createdAt: true,
         description: true,
         id: true,
+        isMonetizationEnabled: true,
+        playlistId: true,
         title: true,
         updatedAt: true,
         username: true,
@@ -132,6 +147,9 @@ export class ChannelControllerBase {
             : undefined,
         },
         select: {
+          channelCategory: true,
+          channelCreationDate: true,
+
           channelStats: {
             select: {
               id: true,
@@ -141,6 +159,8 @@ export class ChannelControllerBase {
           createdAt: true,
           description: true,
           id: true,
+          isMonetizationEnabled: true,
+          playlistId: true,
           title: true,
           updatedAt: true,
           username: true,
@@ -166,6 +186,9 @@ export class ChannelControllerBase {
       return await this.service.deleteChannel({
         where: params,
         select: {
+          channelCategory: true,
+          channelCreationDate: true,
+
           channelStats: {
             select: {
               id: true,
@@ -175,6 +198,8 @@ export class ChannelControllerBase {
           createdAt: true,
           description: true,
           id: true,
+          isMonetizationEnabled: true,
+          playlistId: true,
           title: true,
           updatedAt: true,
           username: true,
