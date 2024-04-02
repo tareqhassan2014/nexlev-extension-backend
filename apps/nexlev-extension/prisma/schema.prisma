@@ -8,14 +8,18 @@ generator client {
 }
 
 model Channel {
-  channelStats   ChannelStat? @relation(fields: [channelStatsId], references: [id])
-  channelStatsId String?      @unique @db.ObjectId
-  createdAt      DateTime     @default(now())
-  description    String?
-  id             String       @id @default(auto()) @map("_id") @db.ObjectId
-  title          String
-  updatedAt      DateTime     @updatedAt
-  username       String       @unique
+  channelCategory       String?
+  channelCreationDate   DateTime?
+  channelStats          ChannelStat? @relation(fields: [channelStatsId], references: [id])
+  channelStatsId        String?      @unique @db.ObjectId
+  createdAt             DateTime     @default(now())
+  description           String?
+  id                    String       @id @default(auto()) @map("_id") @db.ObjectId
+  isMonetizationEnabled Boolean?
+  playlistId            String?
+  title                 String
+  updatedAt             DateTime     @updatedAt
+  username              String       @unique
 }
 
 model ChannelStat {
